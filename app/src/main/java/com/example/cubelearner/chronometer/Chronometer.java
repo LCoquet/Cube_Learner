@@ -5,20 +5,27 @@ public class Chronometer {
     private Counter hours;
     private CyclingCounter minutes;
     private CyclingCounter seconds;
-    private CyclingCounter milliseconds;
+    private CyclingCounter centiseconds;
 
     public Chronometer(){
         hours = new Counter();
         minutes = new CyclingCounter(59);
         seconds = new CyclingCounter(59);
-        milliseconds = new CyclingCounter(999);
+        centiseconds = new CyclingCounter(99);
     }
 
     public void increment(){
-        if(milliseconds.increment())
+        if(centiseconds.increment())
             if(seconds.increment())
                 if(minutes.increment())
                     hours.increment();
+    }
+
+    public void reset(){
+        centiseconds.setValue(0);
+        seconds.setValue(0);
+        minutes.setValue(0);
+        hours.setValue(0);
     }
 
     public Counter getHours() {
@@ -40,12 +47,14 @@ public class Chronometer {
         this.seconds = seconds;
     }
     public CyclingCounter getMilliseconds() {
-        return milliseconds;
+        return centiseconds;
     }
     public void setMilliseconds(CyclingCounter milliseconds) {
-        this.milliseconds = milliseconds;
+        this.centiseconds = milliseconds;
     }
+
+    @Override
     public String toString(){
-        return hours.toString()+":"+minutes.toString()+":"+seconds.toString()+":"+milliseconds.toString();
+        return hours.toString()+":"+minutes.toString()+":"+seconds.toString()+":"+centiseconds.toString();
     }
 }

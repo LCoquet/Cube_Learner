@@ -8,21 +8,20 @@ import android.widget.TextView;
 
 import com.example.cubelearner.chronometer.Chronometer;
 import com.example.cubelearner.chronometer.ChronometerRun;
-import com.example.cubelearner.chronometer.ChronometerTask;
-
-import java.util.Timer;
 
 public class MainActivity extends AppCompatActivity {
 
      private static TextView chronometerTV;
      private static Chronometer chronometer;
-     private boolean runningChronometer = false;
+     private boolean running = false;
+     private ChronometerRun chronometerThread;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         chronometer = new Chronometer();
+        chronometerThread = new ChronometerRun();
         chronometerTV = (TextView) findViewById(R.id.chronometer);
         refreshChronometerTV();
     }
@@ -31,9 +30,15 @@ public class MainActivity extends AppCompatActivity {
         chronometerTV.setText(chronometer.toString());
     }
 
-    public void runChronometer(View v){
-        ChronometerRun cr = new ChronometerRun();
-        cr.run();
+    public void runChronometer(View v) {
+        if(!chronometerThread.isRunning()) {
+            chronometer.reset();
+            chronometerThread.start();
+        }
+        else {
+            chronometerThread.close();
+            chronometerThread = new ChronometerRun();
+        }
     }
 
     public static Chronometer getChronometer(){
