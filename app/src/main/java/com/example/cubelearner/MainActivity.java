@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.example.cubelearner.chronometer.Chronometer;
 import com.example.cubelearner.chronometer.ChronometerRun;
+import com.example.cubelearner.scrambler.ThreeByThree;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -15,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
      private static Chronometer chronometer;
      private boolean running = false;
      private ChronometerRun chronometerThread;
+     private TextView scrambleTV;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +25,8 @@ public class MainActivity extends AppCompatActivity {
         chronometer = new Chronometer();
         chronometerThread = new ChronometerRun();
         chronometerTV = (TextView) findViewById(R.id.chronometer);
+        scrambleTV = (TextView) findViewById(R.id.scramble);
+        refreshScramble();
         refreshChronometerTV();
     }
 
@@ -37,8 +41,13 @@ public class MainActivity extends AppCompatActivity {
         }
         else {
             chronometerThread.close();
+            refreshScramble();
             chronometerThread = new ChronometerRun();
         }
+    }
+
+    public void refreshScramble(){
+        scrambleTV.setText(ThreeByThree.scrambler());
     }
 
     public static Chronometer getChronometer(){
