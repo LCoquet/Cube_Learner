@@ -8,4 +8,6 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="chronometerStopped">#D32F2F</color>
+    <color name="chronometerRunning">#689F38</color>
+    <color name="taskbar">#656565</color>
 </resources>
