@@ -21,6 +21,7 @@ public class TimeTable extends SQLiteOpenHelper {
     private static final String timePuzzle = "puzzle";
     private static final String timeTime = "time";
     private static final String timePrecise = "precise";
+    private static final String timeScramble = "scramble";
 
     //algorithm table columns
     private static final String algorithmId = "id";
@@ -43,7 +44,8 @@ public class TimeTable extends SQLiteOpenHelper {
                     timeId + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                     timePuzzle + " VARCHAR," +
                     timeTime + " VARCHAR," +
-                    timePrecise + " LONG" +
+                    timePrecise + " LONG," +
+                    timeScramble + " VARCHAR" +
                 ")";
         String CREATE_ALGORITHM_TABLE = "CREATE TABLE IF NOT EXISTS " + algorithmTable +
                 "(" +
@@ -84,11 +86,12 @@ public class TimeTable extends SQLiteOpenHelper {
             return "No time left";
     }
 
-    public void addTime(String puzzle, String time, long precise){
+    public void addTime(String puzzle, String time, long precise, String scramble){
         ContentValues values = new ContentValues();
         values.put(timePuzzle, puzzle);
         values.put(timeTime, time);
         values.put(timePrecise, precise);
+        values.put(timeScramble, scramble);
         SQLiteDatabase db = getWritableDatabase();
         db.insert(timeTable, null, values);
     }

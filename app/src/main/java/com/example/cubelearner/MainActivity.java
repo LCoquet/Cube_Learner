@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
      private static Chronometer chronometer;
      private ChronometerRun chronometerThread;
      private boolean running = false;
-    private static TextView chronometerTV;
+     private static TextView chronometerTV;
      private TextView scrambleTV;
      private TextView lastTimeTV;
      private TextView bestTimeTV;
@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
         else {
             chronometerThread.close();
             chronometerThread = new ChronometerRun();
-            db.addTime("3*3", chronometer.toString(), chronometer.getTotalCentiSeconds().getValue());
+            db.addTime("3*3", chronometer.toString(), chronometer.getTotalCentiSeconds().getValue(), (String) scrambleTV.getText());
             refreshScramble();
             refreshLastTime();
             refreshBestTime();
@@ -72,12 +72,12 @@ public class MainActivity extends AppCompatActivity {
         scrambleTV.setText(ThreeByThree.scrambler());
     }
     public void refreshLastTime(){
-        String res = "Last time ";
+        String res = "Last time : ";
         res += db.getLastTime("3*3");
         lastTimeTV.setText(res);
     }
     public void refreshBestTime(){
-        String res = "Best time ";
+        String res = "Best time : ";
         res += db.getBestTime("3*3");
         bestTimeTV.setText(res);
     }
