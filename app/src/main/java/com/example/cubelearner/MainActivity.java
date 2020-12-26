@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -13,8 +12,6 @@ import com.example.cubelearner.chronometer.Chronometer;
 import com.example.cubelearner.chronometer.ChronometerRun;
 import com.example.cubelearner.databases.TimeTable;
 import com.example.cubelearner.scrambler.ThreeByThree;
-
-import java.sql.Time;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -35,12 +32,11 @@ public class MainActivity extends AppCompatActivity {
          */
         //this.deleteDatabase("CubeLearner_data");
         db = new TimeTable(this);
-        db.onUpgrade(db.getWritableDatabase(), 1, 2);
         chronometer = new Chronometer();
         chronometerThread = new ChronometerRun();
-        chronometerTV = (TextView) findViewById(R.id.chronometer);
-        scrambleTV = (TextView) findViewById(R.id.scramble);
-        lastTimeTV = (TextView) findViewById(R.id.lastTime);
+        chronometerTV = findViewById(R.id.chronometer);
+        scrambleTV = findViewById(R.id.scramble);
+        lastTimeTV = findViewById(R.id.lastTime);
         updateBackgroundColor();
         refreshScramble();
         refreshChronometerTV();
@@ -71,10 +67,14 @@ public class MainActivity extends AppCompatActivity {
     public void refreshScramble(){
         scrambleTV.setText(ThreeByThree.scrambler());
     }
-    public void refreshLastTime(){ lastTimeTV.setText("Last time : " + db.getLastTime("3*3")); }
+    public void refreshLastTime(){
+        String res = "Last time ";
+        res += db.getLastTime("3*3");
+        lastTimeTV.setText(res);
+    }
 
     public void updateBackgroundColor(){
-        ConstraintLayout back = (ConstraintLayout) findViewById(R.id.background);
+        ConstraintLayout back = findViewById(R.id.background);
         if(running)
             back.setBackgroundColor(ContextCompat.getColor(this, R.color.chronometerRunning));
         else
