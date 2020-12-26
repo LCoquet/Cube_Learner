@@ -2,15 +2,15 @@ package com.example.cubelearner.chronometer;
 
 public class Counter {
 
-    private int value;
+    private long value;
 
     public Counter(){
         this.value = 0;
     }
-    public int getValue(){
+    public long getValue(){
         return value;
     }
-    public void setValue(int value) {
+    public void setValue(long value) {
         this.value = value;
     }
     public boolean increment(){
