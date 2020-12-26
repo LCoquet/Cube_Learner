@@ -74,6 +74,16 @@ public class TimeTable extends SQLiteOpenHelper {
             return "No time left";
     }
 
+    public String getBestTime(String puzzle){
+        String QUERY = "SELECT * FROM " + timeTable + " WHERE puzzle='" + puzzle + "' ORDER BY " + timePrecise + " ASC LIMIT 1";
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.rawQuery(QUERY, null);
+        if(cursor.moveToFirst())
+            return cursor.getString(cursor.getColumnIndex(timeTime));
+        else
+            return "No time left";
+    }
+
     public void addTime(String puzzle, String time, long precise){
         ContentValues values = new ContentValues();
         values.put(timePuzzle, puzzle);

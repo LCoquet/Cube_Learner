@@ -15,12 +15,13 @@ import com.example.cubelearner.scrambler.ThreeByThree;
 
 public class MainActivity extends AppCompatActivity {
 
-     private static TextView chronometerTV;
      private static Chronometer chronometer;
      private ChronometerRun chronometerThread;
      private boolean running = false;
+    private static TextView chronometerTV;
      private TextView scrambleTV;
      private TextView lastTimeTV;
+     private TextView bestTimeTV;
      TimeTable db;
 
     @Override
@@ -37,10 +38,12 @@ public class MainActivity extends AppCompatActivity {
         chronometerTV = findViewById(R.id.chronometer);
         scrambleTV = findViewById(R.id.scramble);
         lastTimeTV = findViewById(R.id.lastTime);
+        bestTimeTV = findViewById(R.id.bestTime);
         updateBackgroundColor();
         refreshScramble();
         refreshChronometerTV();
         refreshLastTime();
+        refreshBestTime();
     }
 
     public static void refreshChronometerTV(){
@@ -59,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
             db.addTime("3*3", chronometer.toString(), chronometer.getTotalCentiSeconds().getValue());
             refreshScramble();
             refreshLastTime();
+            refreshBestTime();
             running = false;
         }
         updateBackgroundColor();
@@ -72,7 +76,11 @@ public class MainActivity extends AppCompatActivity {
         res += db.getLastTime("3*3");
         lastTimeTV.setText(res);
     }
-
+    public void refreshBestTime(){
+        String res = "Best time ";
+        res += db.getBestTime("3*3");
+        bestTimeTV.setText(res);
+    }
     public void updateBackgroundColor(){
         ConstraintLayout back = findViewById(R.id.background);
         if(running)
