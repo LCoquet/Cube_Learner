@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -87,6 +88,17 @@ public class MainActivity extends AppCompatActivity {
             back.setBackgroundColor(ContextCompat.getColor(this, R.color.chronometerRunning));
         else
             back.setBackgroundColor(ContextCompat.getColor(this, R.color.chronometerStopped));
+    }
+    public void algorithmButton(View v){
+        String type;
+        switch(v.getId()){
+            case R.id.ollButton : type = "oll";   break;
+            case R.id.pllButton : type = "pll"; break;
+            default : type = ""; break;
+        }
+        Intent i = new Intent(this, AlgorithmActivity.class);
+        i.putExtra("type", type);
+        startActivity(i);
     }
 
     public static Chronometer getChronometer(){
