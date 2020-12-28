@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         /*
          * Only here for tests. Will delete this line later
          */
-        //this.deleteDatabase("CubeLearner_data");
+        this.deleteDatabase("CubeLearner_data");
         db = new TimeTable(this);
         chronometer = new Chronometer();
         chronometerThread = new ChronometerRun();
