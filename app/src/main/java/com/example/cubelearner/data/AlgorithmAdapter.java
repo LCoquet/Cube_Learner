@@ -1,7 +1,6 @@
 package com.example.cubelearner.data;
 
 import android.content.Context;
-import android.graphics.drawable.ColorDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,8 +9,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.cubelearner.R;
-
-import org.w3c.dom.Text;
 
 import java.util.List;
 
@@ -36,8 +33,7 @@ public class AlgorithmAdapter extends ArrayAdapter<Algorithm> {
         Algorithm algorithm = getItem(position);
         avh.id.setText(algorithm.getId());
         avh.algorithm.setText(algorithm.getAlgorithm());
-        avh.image.setImageResource(R.drawable.sourire);
-
+        avh.image.setImageResource(getContext().getResources().getIdentifier("ic_" + algorithm.getId().toLowerCase(), "drawable", getContext().getPackageName()));
         return convertView;
     }
 
