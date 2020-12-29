@@ -1,4 +1,4 @@
-package com.example.cubelearner.chronometer;
+package com.example.cubelearner.stopwatch;
 
 public class Counter {
 
@@ -22,6 +22,7 @@ public class Counter {
             value --;
         return false;
     }
+    @Override
     public String toString(){
         return String.valueOf(value);
     }

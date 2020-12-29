@@ -1,6 +1,6 @@
-package com.example.cubelearner.chronometer;
+package com.example.cubelearner.stopwatch;
 
-public class Chronometer {
+public class Stopwatch {
 
     private Counter hours;
     private CyclingCounter minutes;
@@ -8,7 +8,7 @@ public class Chronometer {
     private CyclingCounter centiseconds;
     private Counter totalCentiSeconds;
 
-    public Chronometer(){
+    public Stopwatch(){
         hours = new Counter();
         minutes = new CyclingCounter(59);
         seconds = new CyclingCounter(59);

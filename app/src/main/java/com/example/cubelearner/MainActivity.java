@@ -9,17 +9,17 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
-import com.example.cubelearner.chronometer.Chronometer;
-import com.example.cubelearner.chronometer.ChronometerRun;
+import com.example.cubelearner.stopwatch.Stopwatch;
+import com.example.cubelearner.stopwatch.StopwatchRun;
 import com.example.cubelearner.databases.TimeTable;
 import com.example.cubelearner.scrambler.ThreeByThree;
 
 public class MainActivity extends AppCompatActivity {
 
-     private static Chronometer chronometer;
-     private ChronometerRun chronometerThread;
+     private static Stopwatch stopwatch;
+     private StopwatchRun stopwatchThread;
      private boolean running = false;
-     private static TextView chronometerTV;
+     private TextView stopwatchTV;
      private TextView scrambleTV;
      private TextView lastTimeTV;
      private TextView bestTimeTV;
@@ -32,35 +32,41 @@ public class MainActivity extends AppCompatActivity {
         /*
          * Only here for tests. Will delete this line later
          */
-        this.deleteDatabase("CubeLearner_data");
+        //this.deleteDatabase("CubeLearner_data");
         db = new TimeTable(this);
-        chronometer = new Chronometer();
-        chronometerThread = new ChronometerRun();
-        chronometerTV = findViewById(R.id.chronometer);
+        stopwatch = new Stopwatch();
+        stopwatchThread = new StopwatchRun(this);
+        stopwatchTV = findViewById(R.id.chronometer); //Recovery of every views we may change
         scrambleTV = findViewById(R.id.scramble);
         lastTimeTV = findViewById(R.id.lastTime);
         bestTimeTV = findViewById(R.id.bestTime);
-        updateBackgroundColor();
-        refreshScramble();
-        refreshChronometerTV();
+        updateBackgroundColor();    //Color is red while stopwatch is not running and green during the run
+        refreshScramble();  //refresh all the TextViews to have the right informations
+        refreshStopwatchTV();
         refreshLastTime();
         refreshBestTime();
     }
 
-    public static void refreshChronometerTV(){
-        chronometerTV.setText(chronometer.toString());
+    public void refreshStopwatchTV(){
+        //we have to run on ui thread because it is impossible to update a wrapped view on a lower layout
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                stopwatchTV.setText(stopwatch.toString());
+            }
+        });
     }
 
-    public void runChronometer(View v) {
+    public void runStopwatch(View v) {
         if(!running) {
-            chronometer.reset();
-            chronometerThread.start();
+            stopwatch.reset();    //reset the stopwatch to have a fresh stopwatch at every run
+            stopwatchThread.start();
             running = true;
         }
         else {
-            chronometerThread.close();
-            chronometerThread = new ChronometerRun();
-            db.addTime("3*3", chronometer.toString(), chronometer.getTotalCentiSeconds().getValue(), (String) scrambleTV.getText());
+            stopwatchThread.close();  //stops the thread and then the stopwatch
+            stopwatchThread = new StopwatchRun(this);
+            db.addTime("3*3", stopwatch.toString(), stopwatch.getTotalCentiSeconds().getValue(), (String) scrambleTV.getText());
             refreshScramble();
             refreshLastTime();
             refreshBestTime();
@@ -85,9 +91,9 @@ public class MainActivity extends AppCompatActivity {
     public void updateBackgroundColor(){
         ConstraintLayout back = findViewById(R.id.background);
         if(running)
-            back.setBackgroundColor(ContextCompat.getColor(this, R.color.chronometerRunning));
+            back.setBackgroundColor(ContextCompat.getColor(this, R.color.stopwatchRunning));
         else
-            back.setBackgroundColor(ContextCompat.getColor(this, R.color.chronometerStopped));
+            back.setBackgroundColor(ContextCompat.getColor(this, R.color.stopwatchStopped));
     }
     public void algorithmButton(View v){
         String type;
@@ -101,8 +107,8 @@ public class MainActivity extends AppCompatActivity {
         startActivity(i);
     }
 
-    public static Chronometer getChronometer(){
-        return chronometer;
+    public Stopwatch getStopwatch(){
+        return stopwatch;
     }
 
 }

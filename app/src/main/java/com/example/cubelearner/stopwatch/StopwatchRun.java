@@ -1,16 +1,18 @@
-package com.example.cubelearner.chronometer;
+package com.example.cubelearner.stopwatch;
 
 import android.os.SystemClock;
 
 import com.example.cubelearner.MainActivity;
 
-public class ChronometerRun extends Thread {
+public class StopwatchRun extends Thread {
     private boolean running = false;
-    Chronometer chronometer;
+    private MainActivity activity;
+    private Stopwatch chronometer;
     private static long ELAPSE_TIME = 10000000L;
 
-    public ChronometerRun(){
-        chronometer = MainActivity.getChronometer();
+    public StopwatchRun(MainActivity activity){
+        this.activity = activity;
+        chronometer = activity.getStopwatch();
     }
 
     @Override
@@ -22,7 +24,7 @@ public class ChronometerRun extends Thread {
             buffer2 = SystemClock.elapsedRealtimeNanos();
             if(buffer2 >= buffer + ELAPSE_TIME){
                 chronometer.increment();
-                MainActivity.refreshChronometerTV();
+                activity.refreshStopwatchTV();
                 buffer = buffer2;
             }
         }

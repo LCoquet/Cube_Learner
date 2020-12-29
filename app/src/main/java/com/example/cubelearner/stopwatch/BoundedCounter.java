@@ -1,4 +1,4 @@
-package com.example.cubelearner.chronometer;
+package com.example.cubelearner.stopwatch;
 
 public class BoundedCounter extends Counter {
 
@@ -24,6 +24,7 @@ public class BoundedCounter extends Counter {
             return false;
     }
 
+    @Override
     public String toString(){
         String res = "";
         int difference = String.valueOf(getLimit()).length() - String.valueOf(getValue()).length();
