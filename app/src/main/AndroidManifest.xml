@@ -13,7 +13,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.CubeLearner">
-        <activity android:name=".AlgorithmActivity"></activity>
+        <activity android:name=".StatsActivity"></activity>
+        <activity android:name=".AlgorithmActivity" />
 
         <uses-library
             android:name="com.google.android.wearable"
@@ -26,7 +27,8 @@
             android:name="com.google.android.wearable.standalone"
             android:value="true" />
 
-        <activity android:name=".MainActivity"
+        <activity
+            android:name=".MainActivity"
             android:configChanges="orientation|screenSize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
