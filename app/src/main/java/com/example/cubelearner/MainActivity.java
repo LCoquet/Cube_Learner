@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         db = new TimeTable(this);
         stopwatch = new Stopwatch();
         stopwatchThread = new StopwatchRun(this);
-        stopwatchTV = findViewById(R.id.chronometer); //Recovery of every views we may change
+        stopwatchTV = findViewById(R.id.stopwatch); //Recovery of every views we may change
         scrambleTV = findViewById(R.id.scramble);
         lastTimeTV = findViewById(R.id.lastTime);
         bestTimeTV = findViewById(R.id.bestTime);

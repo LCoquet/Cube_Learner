@@ -61,6 +61,6 @@ public class Stopwatch {
 
     @Override
     public String toString(){
-        return hours.toString()+":"+minutes.toString()+":"+seconds.toString()+"."+centiseconds.toString();
+        return hours.toString()+":"+minutes.toString()+":"+seconds.toString()+":"+centiseconds.toString();
     }
 }

@@ -1,10 +1,13 @@
 package com.example.cubelearner;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.ContextCompat;
 
 import android.content.Context;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -53,6 +56,10 @@ public class AlgorithmActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         return algorithms;
+    }
+
+    public void refreshAlgorithmColor(View v){
+        v.findViewById(R.id.algorithmBackground).setBackgroundColor(ContextCompat.getColor(this, R.color.stopwatchRunning));
     }
 
 }
