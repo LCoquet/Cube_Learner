@@ -5,16 +5,9 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.renderscript.ScriptGroup;
 
-import com.example.cubelearner.AlgorithmActivity;
-import com.example.cubelearner.MainActivity;
+import com.example.cubelearner.data.Time;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.sql.SQLInput;
 import java.util.ArrayList;
 
 public class TimeTable extends SQLiteOpenHelper {
@@ -107,43 +100,21 @@ public class TimeTable extends SQLiteOpenHelper {
         db.insert(timeTable, null, values);
     }
 
-    //may become useless methods
-    /*
-    public ArrayList<Algorithm> getAlgorithms(String type){
-        String id;
-        String algo;
-        ArrayList<Algorithm> algorithms = new ArrayList<>();
-        String QUERY = "SELECT * FROM " + algorithmTable +
-                " WHERE type ='" + type + "'";
+    public ArrayList<Time> getAllTime(String puzzle){
+        ArrayList<Time> times = new ArrayList<>();
+        String time, scramble;
+        long precise;
+        String QUERY = "SELECT * FROM " + timeTable + " WHERE puzzle ='" + puzzle + "'";
         SQLiteDatabase db = getReadableDatabase();
         Cursor cursor = db.rawQuery(QUERY, null);
         if(cursor.moveToFirst()){
-            do {
-                id = cursor.getString(cursor.getColumnIndex(algorithmId));
-                algo = cursor.getString(cursor.getColumnIndex(algorithmAlgorithm));
-                algorithms.add(new Algorithm(id, algo));
+            do{
+                time = cursor.getString(cursor.getColumnIndex(timeTime));
+                precise = cursor.getLong(cursor.getColumnIndex(timePrecise));
+                scramble = cursor.getString(cursor.getColumnIndex(timeScramble));
+                times.add(new Time(time, precise, scramble));
             } while(cursor.moveToNext());
         }
-        return algorithms;
+        return times;
     }
-
-    public void createAlgorithmDb(String type){
-        try {
-
-            BufferedReader br = new BufferedReader(new InputStreamReader(AlgorithmActivity.getContext().get));
-            SQLiteDatabase db = getWritableDatabase();
-            String line = " ";
-            String[] values;
-            ContentValues contentValues = new ContentValues();
-            while((line = br.readLine()) != null){
-                values = line.split(";");
-                contentValues.put(algorithmId, values[0]);
-                contentValues.put(algorithmType, type);
-                contentValues.put(algorithmAlgorithm, values[1]);
-                db.insert(algorithmTable, null, contentValues);
-            }
-        } catch (Exception e){
-            e.printStackTrace();
-        }
-    }*/
 }
