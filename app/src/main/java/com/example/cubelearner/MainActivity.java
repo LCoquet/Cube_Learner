@@ -107,6 +107,11 @@ public class MainActivity extends AppCompatActivity {
         startActivity(i);
     }
 
+    public void launchStats(View v){
+        Intent intent = new Intent(this, StatsActivity.class);
+        startActivity(intent);
+    }
+
     public Stopwatch getStopwatch(){
         return stopwatch;
     }
