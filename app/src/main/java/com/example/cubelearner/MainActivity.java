@@ -4,15 +4,21 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import com.example.cubelearner.processing.NotificationReceiver;
 import com.example.cubelearner.stopwatch.Stopwatch;
 import com.example.cubelearner.stopwatch.StopwatchRun;
 import com.example.cubelearner.databases.TimeTable;
 import com.example.cubelearner.scrambler.ThreeByThree;
+
+import java.util.Calendar;
+import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -40,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
         scrambleTV = findViewById(R.id.scramble);
         lastTimeTV = findViewById(R.id.lastTime);
         bestTimeTV = findViewById(R.id.bestTime);
+        myAlarrm();
         updateBackgroundColor();    //Color is red while stopwatch is not running and green during the run
         refreshScramble();  //refresh all the TextViews to have the right informations
         refreshStopwatchTV();
@@ -110,6 +117,23 @@ public class MainActivity extends AppCompatActivity {
     public void launchStats(View v){
         Intent intent = new Intent(this, StatsActivity.class);
         startActivity(intent);
+    }
+
+    public void myAlarrm(){
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY, 23);
+        calendar.set(Calendar.MINUTE, 32);
+        calendar.set(calendar.SECOND, 0);
+
+        if(calendar.getTime().compareTo(new Date()) < 0)
+            calendar.add(Calendar.DAY_OF_MONTH, 1);
+
+        Intent intent = new Intent(getApplicationContext(), NotificationReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+
+        if(alarmManager != null)
+            alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
     }
 
     public Stopwatch getStopwatch(){

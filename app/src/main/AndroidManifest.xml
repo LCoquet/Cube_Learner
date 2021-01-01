@@ -13,8 +13,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.CubeLearner">
-        <activity android:name=".StatsActivity"></activity>
+        <activity android:name=".WikiActivity"></activity>
+        <activity android:name=".StatsActivity" />
         <activity android:name=".AlgorithmActivity" />
+
+        <receiver android:name=".processing.NotificationReceiver" />
 
         <uses-library
             android:name="com.google.android.wearable"
