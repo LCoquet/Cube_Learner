@@ -119,6 +119,11 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void wikiButton(View v){
+        Intent intent = new Intent(this, WikiActivity.class);
+        startActivity(intent);
+    }
+
     public void myAlarrm(){
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.HOUR_OF_DAY, 23);

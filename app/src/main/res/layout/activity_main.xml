@@ -117,7 +117,7 @@
         android:text="wiki"
         android:layout_marginLeft="5dp"
         android:layout_marginBottom="5dp"
-        android:onClick="algorithmButton"
+        android:onClick="wikiButton"
         app:layout_constraintBottom_toTopOf="@+id/statistics"
         app:layout_constraintLeft_toLeftOf="parent"
         />

@@ -5,6 +5,22 @@
     This string is used for square devices and overridden by hello_world in
     values-round/strings.xml for round devices.
     -->
+    <string name="wikiIntro">
+        Each move is called by a letter representing a side of the cube. For example, R stands for right.
+        When you see a letter it means you got to turn it clockwise. If, after the letter, there is a simple quote, for example R\',
+        you got to turn the side counter clockwise. If there is 2 after the letter, you got to make a half turn of the side.\nIf
+        the letter is written lowercase, you have to turn two layers of the corresponding side.
+    </string>
+    <string name="wikiList">
+        There are six primary movements.
+        \nR stands for right.\nU stands for up.\nF stands for forward\nL stands for left.\nD stands for down.\nB stands for back.\n
+        \nThere are three moves of the whole cube.
+        \nx for a turn on x-axis.\ny for a turn on y-axis.\nz for a turn on z-axis.\n
+        \nThere are three moves of middle layers.
+        \nM for the layer between L and R.\nE for the layer between U and D.\nS for the layer between F and B.\n
+        \nFinaly if you see M, E or S but lowercase, it means :
+        \nm for R+L\' at the same time.\ne for U+D\' at the same time.\ns for F+B\' at the same time.
+    </string>
     <string name="hello_world">Hello Square World!</string>
     <string name="title_activity_scrolling">ScrollingActivity</string>
     <string name="large_text">
