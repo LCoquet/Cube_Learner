@@ -6,10 +6,16 @@ import androidx.core.content.ContextCompat;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.cubelearner.processing.NotificationReceiver;
 import com.example.cubelearner.stopwatch.Stopwatch;
@@ -20,16 +26,24 @@ import com.example.cubelearner.scrambler.ThreeByThree;
 import java.util.Calendar;
 import java.util.Date;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements SensorEventListener {
 
      private static Stopwatch stopwatch;
      private StopwatchRun stopwatchThread;
      private boolean running = false;
+
      private TextView stopwatchTV;
      private TextView scrambleTV;
      private TextView lastTimeTV;
      private TextView bestTimeTV;
      TimeTable db;
+
+     private SensorManager sensorManager;
+     private Sensor accelerometerSensor;
+     private boolean isAccelerometerAvailable = false;
+     private float lastX, lastY, lastZ;
+     private boolean itIsNotFirstTime;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +66,16 @@ public class MainActivity extends AppCompatActivity {
         refreshStopwatchTV();
         refreshLastTime();
         refreshBestTime();
+
+        //Declaration of the Sensor Manager to detect the shakes to reset the stopWatch.
+        sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        if(sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER) != null) {
+            accelerometerSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+            isAccelerometerAvailable = true;
+        }else{
+            isAccelerometerAvailable = false;
+            Toast.makeText(this, "The accelerometer is not available ", Toast.LENGTH_SHORT).show();
+        }
     }
 
     public void refreshStopwatchTV(){
@@ -145,4 +169,56 @@ public class MainActivity extends AppCompatActivity {
         return stopwatch;
     }
 
+    @Override
+    public void onSensorChanged(SensorEvent event) {
+        float currentX, currentY, currentZ;
+        float xDifference, yDifference, zDifference;
+        float shakeThreshold = 0.5f;
+
+        currentX = event.values[0];
+        currentY = event.values[1];
+        currentZ = event.values[2];
+
+        if(itIsNotFirstTime){
+            xDifference = Math.abs(lastX - currentX);
+            yDifference = Math.abs(lastY - currentY);
+            zDifference = Math.abs(lastZ - currentZ);
+
+            if((xDifference > shakeThreshold && yDifference>shakeThreshold)||(xDifference > shakeThreshold && zDifference > shakeThreshold)
+                    ||(yDifference > shakeThreshold && zDifference > shakeThreshold)){
+
+                if(!running){
+                    stopwatch.reset();
+                    refreshStopwatchTV();
+                }
+            }
+        }
+
+        lastX = currentX;
+        lastY = currentY;
+        lastZ = currentZ;
+        itIsNotFirstTime = true;
+
+    }
+
+    @Override
+    public void onAccuracyChanged(Sensor sensor, int accuracy) {
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if(isAccelerometerAvailable){
+            sensorManager.unregisterListener(this);
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(isAccelerometerAvailable){
+            sensorManager.registerListener(this, accelerometerSensor, SensorManager.SENSOR_DELAY_NORMAL);
+        }
+    }
 }
