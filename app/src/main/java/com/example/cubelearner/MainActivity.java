@@ -190,6 +190,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                 if(!running){
                     stopwatch.reset();
                     refreshStopwatchTV();
+                    Toast.makeText(this, "Time reset", Toast.LENGTH_SHORT).show();
                 }
             }
         }
