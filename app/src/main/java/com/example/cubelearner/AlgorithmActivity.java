@@ -1,26 +1,24 @@
 package com.example.cubelearner;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 
-import android.content.Context;
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.example.cubelearner.data.Algorithm;
 import com.example.cubelearner.data.AlgorithmAdapter;
-import com.example.cubelearner.databases.TimeTable;
 
 import java.io.BufferedReader;
-import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+
+/*
+ * Shows all the OLL or PLL algorithms.
+ */
 
 public class AlgorithmActivity extends AppCompatActivity {
 
@@ -37,6 +35,7 @@ public class AlgorithmActivity extends AppCompatActivity {
         algorithmLV.setAdapter(adapter);
     }
 
+    //Finds all the algorithm from the ressources.
     private List<Algorithm> algorithmGenerator(String type){
         InputStream is = null;
         ArrayList<Algorithm> algorithms = new ArrayList<Algorithm>();
@@ -56,10 +55,6 @@ public class AlgorithmActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         return algorithms;
-    }
-
-    public void refreshAlgorithmColor(View v){
-        v.findViewById(R.id.algorithmBackground).setBackgroundColor(ContextCompat.getColor(this, R.color.stopwatchRunning));
     }
 
 }

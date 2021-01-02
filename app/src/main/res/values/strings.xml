@@ -21,6 +21,10 @@
         \nFinaly if you see M, E or S but lowercase, it means :
         \nm for R+L\' at the same time.\ne for U+D\' at the same time.\ns for F+B\' at the same time.
     </string>
+    <string name="wikiOllPll">
+        Oll stands for Orientating Last Layer.
+        \nPll stands for Placing Last Layer.
+    </string>
     <string name="hello_world">Hello Square World!</string>
     <string name="title_activity_scrolling">ScrollingActivity</string>
     <string name="large_text">

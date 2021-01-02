@@ -6,7 +6,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 
 import com.example.cubelearner.data.Time;
-import com.example.cubelearner.databases.TimeTable;
+import com.example.cubelearner.database.TimeTable;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;

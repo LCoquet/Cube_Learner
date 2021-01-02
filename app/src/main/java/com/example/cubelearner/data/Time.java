@@ -1,5 +1,9 @@
 package com.example.cubelearner.data;
 
+/*
+ * Data class for a time, permits to be stored for the statistics activity.
+ */
+
 public class Time {
 
     private String chrono;

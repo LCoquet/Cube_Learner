@@ -12,6 +12,11 @@ import androidx.core.app.NotificationCompat;
 import com.example.cubelearner.MainActivity;
 import com.example.cubelearner.R;
 
+/*
+ * Found on stack overflow.
+ * Creation of the notification and the text written in.
+ */
+
 public class NotificationHelper {
 
     private Context mContext;

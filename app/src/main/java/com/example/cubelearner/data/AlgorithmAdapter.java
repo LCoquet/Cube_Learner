@@ -12,6 +12,10 @@ import com.example.cubelearner.R;
 
 import java.util.List;
 
+/*
+ * Permits the creation of algorithm views in the ListView of AlgorithmActivity.
+ */
+
 public class AlgorithmAdapter extends ArrayAdapter<Algorithm> {
 
     public AlgorithmAdapter(Context context, List<Algorithm> algorithms){
@@ -29,15 +33,17 @@ public class AlgorithmAdapter extends ArrayAdapter<Algorithm> {
             avh.algorithm = (TextView) convertView.findViewById(R.id.algorithm);
             avh.image = (ImageView) convertView.findViewById(R.id.algorithmImage);
             convertView.setTag(avh);
-        }
+        } //Find the views
         Algorithm algorithm = getItem(position);
+        //Set the text or image on the different views.
         avh.id.setText(algorithm.getId());
         avh.algorithm.setText(algorithm.getAlgorithm());
         avh.image.setImageResource(getContext().getResources().getIdentifier("ic_" + algorithm.getId().toLowerCase(), "drawable", getContext().getPackageName()));
         return convertView;
     }
 
-    private class AlgorithmViewHolder{
+    //Stores the different sub-views of algorithm view.
+    private class AlgorithmViewHolder {
         public TextView id;
         public TextView algorithm;
         public ImageView image;

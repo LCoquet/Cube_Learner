@@ -14,7 +14,7 @@ import android.widget.TextView;
 import com.example.cubelearner.processing.NotificationReceiver;
 import com.example.cubelearner.stopwatch.Stopwatch;
 import com.example.cubelearner.stopwatch.StopwatchRun;
-import com.example.cubelearner.databases.TimeTable;
+import com.example.cubelearner.database.TimeTable;
 import com.example.cubelearner.scrambler.ThreeByThree;
 
 import java.util.Calendar;
@@ -126,8 +126,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void myAlarrm(){
         Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.HOUR_OF_DAY, 23);
-        calendar.set(Calendar.MINUTE, 32);
+        calendar.set(Calendar.HOUR_OF_DAY, 14);
+        calendar.set(Calendar.MINUTE, 55);
         calendar.set(calendar.SECOND, 0);
 
         if(calendar.getTime().compareTo(new Date()) < 0)

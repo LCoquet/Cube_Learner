@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
 xmlns:app="http://schemas.android.com/apk/res-auto"
 xmlns:tools="http://schemas.android.com/tools"
-android:background="@color/stopwatchStopped"
+android:background="@color/basicBackground"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
 tools:context=".WikiActivity">
@@ -42,6 +42,19 @@ tools:context=".WikiActivity">
                 app:layout_constraintLeft_toLeftOf="parent"
                 android:layout_marginStart="5dp"
                 android:layout_marginEnd="5dp"/>
+
+            <TextView
+                android:id="@+id/ollpllWiki"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginTop="10dp"
+                android:textSize="20sp"
+                android:textColor="@color/white"
+                android:text="@string/wikiOllPll"
+                app:layout_constraintTop_toBottomOf="@id/list"
+                app:layout_constraintLeft_toLeftOf="@id/parent" />
 
         </LinearLayout>
 

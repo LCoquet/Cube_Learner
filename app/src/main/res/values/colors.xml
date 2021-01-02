@@ -9,5 +9,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="stopwatchStopped">#D32F2F</color>
     <color name="stopwatchRunning">#689F38</color>
+    <color name="basicBackground">#8F8FFF</color>
     <color name="taskbar">#656565</color>
 </resources>

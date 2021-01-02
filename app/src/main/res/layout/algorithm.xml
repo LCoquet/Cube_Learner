@@ -3,7 +3,7 @@
     android:id="@+id/algorithmBackground"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/stopwatchStopped"
+    android:background="@color/basicBackground"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <ImageView
@@ -37,15 +37,5 @@
         android:textColor="@color/white"
         app:layout_constraintLeft_toRightOf="@id/algorithmImage"
         app:layout_constraintTop_toTopOf="@id/algorithmImage"/>
-
-    <Switch
-        android:id="@+id/switch1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Known"
-        android:layout_marginEnd="10dp"
-        android:onClick="refreshAlgorithmColor"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toBottomOf="@id/algorithmImage"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

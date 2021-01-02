@@ -1,5 +1,9 @@
 package com.example.cubelearner.data;
 
+/*
+ * Data class containing an algorithm and its ID, to be shown on the PLL or OLL wiki ie AlgorithmActivity.
+ */
+
 public class Algorithm {
 
     private String id;
